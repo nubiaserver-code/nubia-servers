@@ -217,21 +217,59 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- 9. SERVER STATUS SIMULATION (ping + player count drift) ---
-    // Placeholder client-side flavor only — swap with a real fetch() to a
-    // Bedrock status API when one is available.
+    // --- 9. LIVE SERVER STATUS (real data via mcsrvstat.us public API) ---
+    // Ganti SERVER_ADDRESS kalau IP/port server berubah.
+    const SERVER_ADDRESS = 'nubia.biz.id:19193';
+    const STATUS_API = `https://api.mcsrvstat.us/bedrock/3/${SERVER_ADDRESS}`;
+
+    const stateEl = document.getElementById('server-state');
+    const playerCountEl = document.getElementById('player-count');
+    const playerMaxEl = document.getElementById('player-max');
+    const versionEl = document.getElementById('server-version');
+
+    async function fetchServerStatus() {
+        try {
+            const res = await fetch(STATUS_API, { headers: { 'Accept': 'application/json' } });
+            if (!res.ok) throw new Error('Status API error: ' + res.status);
+            const data = await res.json();
+
+            if (data.online) {
+                stateEl.textContent = 'ONLINE';
+                stateEl.classList.add('online');
+            } else {
+                stateEl.textContent = 'OFFLINE';
+                stateEl.classList.remove('online');
+            }
+
+            if (data.players && typeof data.players.online === 'number') {
+                playerCountEl.textContent = data.players.online;
+            }
+            if (data.players && typeof data.players.max === 'number' && playerMaxEl) {
+                playerMaxEl.textContent = data.players.max;
+            }
+
+            // API bisa balikin "version" sebagai string langsung atau sebagai object { name }
+            const rawVersion = typeof data.version === 'string' ? data.version : (data.version && data.version.name);
+            if (rawVersion && versionEl) {
+                versionEl.textContent = rawVersion;
+            }
+        } catch (err) {
+            // API tidak bisa dihubungi (offline/CORS/dll) — biarkan nilai fallback tampil,
+            // jangan bikin section ini error atau kosong.
+            console.warn('Gagal ambil status server:', err);
+        }
+    }
+
+    fetchServerStatus();
+    setInterval(fetchServerStatus, 60000); // refresh tiap 1 menit (API cache 5 menit)
+
+    // Ping di atas masih nilai simulasi (bukan API real-time), boleh diedit manual
+    // langsung di index.html kalau mau angka tetap.
     setInterval(() => {
         const pingElement = document.getElementById('server-ping');
         const currentPing = parseInt(pingElement.innerText, 10) || 34;
         const newPing = currentPing + (Math.floor(Math.random() * 5) - 2);
         pingElement.innerText = (newPing > 10 ? newPing : 10) + 'ms';
-
-        const playerEl = document.getElementById('player-count');
-        if (playerEl) {
-            const currentPlayers = parseInt(playerEl.innerText, 10) || 124;
-            const drift = Math.floor(Math.random() * 7) - 3;
-            playerEl.innerText = Math.max(40, Math.min(500, currentPlayers + drift));
-        }
     }, 5000);
 
 });
