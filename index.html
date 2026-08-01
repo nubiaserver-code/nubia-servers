@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUBIA SERVER | Semi Anarchy Minecraft Bedrock</title>
+    <meta name="description" content="NUBIA Server — Semi Anarchy Survival Minecraft Bedrock. Join di nubia.biz.id port 19193.">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop preload="none">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" title="Kembali ke atas" aria-label="Kembali ke atas"><i class="fas fa-chevron-up"></i></button>
+
+    <!-- Global Particles Container -->
+    <div id="particles-js" aria-hidden="true"></div>
+
+    <!-- Cinematic Intro -->
+    <div id="intro" role="status" aria-live="polite">
+        <div class="intro-content">
+            <h1 class="intro-logo">NUBIA <span>SERVER</span></h1>
+            <div class="progress-wrapper">
+                <div class="progress-bar" id="intro-progress"></div>
+            </div>
+            <p id="loading-text">Initializing...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">NUBIA<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#store">Store</a></li>
+                <li><a href="#rules">Rules</a></li>
+                <li><a href="#news">News</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button id="musicToggle" class="icon-btn" title="Nyalakan/matikan musik" aria-label="Nyalakan/matikan musik"><i class="fas fa-volume-mute"></i></button>
+                <button class="hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content reveal">
+            <div class="main-logo pulse-anim" aria-hidden="true">N</div>
+            <h1 class="glitch" data-text="NUBIA SERVER">NUBIA SERVER</h1>
+            <h2 class="subtitle">Semi Anarchy Survival Minecraft Bedrock Server</h2>
+
+            <div class="server-ip-box glass">
+                <div class="ip-info">
+                    <span class="ip-label">IP:</span> <span id="server-ip">nubia.biz.id</span>
+                </div>
+                <div class="ip-info">
+                    <span class="ip-label">Port:</span> <span id="server-port">19193</span>
+                </div>
+                <button id="copyIp" class="btn-primary copy-btn"><i class="fas fa-copy"></i> Copy IP</button>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="minecraft://?addExternalServer=NubiaServer|nubia.biz.id:19193" class="btn-primary"><i class="fas fa-play"></i> Join Server</a>
+                <a href="https://discord.gg/JpTnxvBb" target="_blank" rel="noopener noreferrer" class="btn-secondary"><i class="fab fa-discord"></i> Discord</a>
+                <a href="https://chat.whatsapp.com/DAeeOVBVoSsCtB76OJ0x0d?s=cl&p=a&ilr=0" target="_blank" rel="noopener noreferrer" class="btn-secondary"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://linktr.ee/nubiaserver" target="_blank" rel="noopener noreferrer" class="btn-secondary"><i class="fas fa-link"></i> Linktree</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Server Status Section -->
+    <section id="status" class="glass-section reveal">
+        <div class="container status-grid">
+            <div class="status-item glass">
+                <i class="fas fa-signal glow-icon"></i>
+                <h3>Status</h3>
+                <p id="server-state" class="online">ONLINE</p>
+            </div>
+            <div class="status-item glass">
+                <i class="fas fa-users glow-icon"></i>
+                <h3>Players</h3>
+                <p><span id="player-count">124</span> / 500</p>
+            </div>
+            <div class="status-item glass">
+                <i class="fas fa-code-branch glow-icon"></i>
+                <h3>Version</h3>
+                <p>1.20.x - 1.21.x</p>
+            </div>
+            <div class="status-item glass">
+                <i class="fas fa-network-wired glow-icon"></i>
+                <h3>Ping</h3>
+                <p id="server-ping">34ms</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="container reveal">
+        <h2 class="section-title">Server <span>Features</span></h2>
+        <div class="grid-container">
+            <div class="card glass feature-card"><i class="fas fa-coins"></i><h3>Economy</h3><p>Ekonomi player-driven yang seimbang dan dinamis.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-store"></i><h3>Shop</h3><p>Jual beli item secara efisien lewat GUI shop.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-shield-alt"></i><h3>Clan</h3><p>Bentuk aliansi, bangun markas, dan dominasi peta.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-star"></i><h3>BattlePass</h3><p>Selesaikan quest untuk unlock reward premium.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-briefcase"></i><h3>Backpack</h3><p>Bawa lebih banyak loot dengan backpack upgrade.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-university"></i><h3>Bank</h3><p>Amankan kekayaanmu dan dapatkan bunga harian.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-gavel"></i><h3>Auction House</h3><p>Lelang dan tukar item langka dengan player lain.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-random"></i><h3>RTP</h3><p>Teleport acak untuk menemukan tanah yang belum tersentuh.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-people-arrows"></i><h3>TPA</h3><p>Kirim dan terima request teleport secara instan.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-home"></i><h3>SetHome</h3><p>Tandai wilayahmu dan pulang kapan saja dengan aman.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-khanda"></i><h3>PvP</h3><p>Combat brutal dengan mekanik custom.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-calendar-alt"></i><h3>Events</h3><p>Event PvP & survival mingguan dengan hadiah besar.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-gift"></i><h3>Daily Rewards</h3><p>Login tiap hari untuk klaim loot eksklusif.</p></div>
+            <div class="card glass feature-card"><i class="fas fa-trophy"></i><h3>Leaderboards</h3><p>Naik peringkat dan tunjukkan dominasimu.</p></div>
+        </div>
+    </section>
+
+    <!-- Store Section -->
+    <section id="store" class="container reveal">
+        <h2 class="section-title">Premium <span>Store</span></h2>
+        <p class="section-desc" style="text-align: center; margin-bottom: 30px; color: var(--text-muted);">Dukung server dan dapatkan perk eksklusif. Klik 'Buy Now' untuk chat langsung dengan Admin.</p>
+        <div class="grid-container store-grid">
+            <div class="card glass store-card"><h3>VIP</h3><p>Tag eksklusif, chat berwarna, dan akses kit.</p><a href="https://wa.me/qr/J3NPOVN76R4PA1" target="_blank" rel="noopener noreferrer" class="btn-primary">Buy Now</a></div>
+            <div class="card glass store-card"><h3>Ranks</h3><p>Rank global permanen dengan perk bertingkat.</p><a href="https://wa.me/qr/J3NPOVN76R4PA1" target="_blank" rel="noopener noreferrer" class="btn-primary">Buy Now</a></div>
+            <div class="card glass store-card"><h3>Coins</h3><p>Tambah saldo ekonomi kamu secara instan.</p><a href="https://wa.me/qr/J3NPOVN76R4PA1" target="_blank" rel="noopener noreferrer" class="btn-primary">Buy Now</a></div>
+            <div class="card glass store-card"><h3>Crate Keys</h3><p>Buka crate berisi loot rare dan legendary.</p><a href="https://wa.me/qr/J3NPOVN76R4PA1" target="_blank" rel="noopener noreferrer" class="btn-primary">Buy Now</a></div>
+            <div class="card glass store-card"><h3>Bundles</h3><p>Paket diskon: keys, coins, dan VIP jadi satu.</p><a href="https://wa.me/qr/J3NPOVN76R4PA1" target="_blank" rel="noopener noreferrer" class="btn-primary">Buy Now</a></div>
+        </div>
+        <div class="payments glass">
+            <h3>Accepted Payments</h3>
+            <div class="payment-icons">
+                <span class="pay-badge">QRIS</span>
+                <span class="pay-badge">DANA</span>
+                <span class="pay-badge">OVO</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="glass-section reveal">
+        <div class="container">
+            <h2 class="section-title">Community & <span>Support</span></h2>
+            <div class="grid-container support-grid">
+                <a href="https://discord.gg/JpTnxvBb" target="_blank" rel="noopener noreferrer" class="card glass support-card"><i class="fab fa-discord"></i><h3>Discord</h3></a>
+                <a href="https://chat.whatsapp.com/DAeeOVBVoSsCtB76OJ0x0d?s=cl&p=a&ilr=0" target="_blank" rel="noopener noreferrer" class="card glass support-card"><i class="fab fa-whatsapp"></i><h3>WhatsApp Group</h3></a>
+                <a href="https://www.tiktok.com/@nubiaserver?_r=1&_t=ZS-98Vg6zC5VCh" target="_blank" rel="noopener noreferrer" class="card glass support-card"><i class="fab fa-tiktok"></i><h3>TikTok</h3></a>
+                <a href="https://linktr.ee/nubiaserver" target="_blank" rel="noopener noreferrer" class="card glass support-card"><i class="fas fa-link"></i><h3>Linktree</h3></a>
+                <a href="https://saweria.co/nubiaservers" target="_blank" rel="noopener noreferrer" class="card glass support-card"><i class="fas fa-heart"></i><h3>Saweria</h3></a>
+                <a href="mailto:support@nubia.biz.id" class="card glass support-card"><i class="fas fa-envelope"></i><h3>Email</h3></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="rules" class="container reveal">
+        <h2 class="section-title">Server <span>Rules</span></h2>
+        <div class="accordion">
+            <div class="accordion-item glass">
+                <button class="accordion-header" aria-expanded="false">1. No Hacking or Exploits <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content"><p>Modified client, x-ray, atau duping apapun bentuknya akan berujung permanent ban. Main jujur.</p></div>
+            </div>
+            <div class="accordion-item glass">
+                <button class="accordion-header" aria-expanded="false">2. Griefing & PvP Allowed <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content"><p>Ini server semi-anarchy. Griefing base tak terlindungi dan membunuh player lain diperbolehkan di luar spawn.</p></div>
+            </div>
+            <div class="accordion-item glass">
+                <button class="accordion-header" aria-expanded="false">3. Respect the Community <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content"><p>Tidak ada toxic ekstrem, doxing, atau ujaran kebencian di chat. Bercanda boleh, tapi tetap beradab.</p></div>
+            </div>
+            <div class="accordion-item glass">
+                <button class="accordion-header" aria-expanded="false">4. No Spawn Trapping <i class="fas fa-chevron-down"></i></button>
+                <div class="accordion-content"><p>Jangan membuat jebakan tepat di luar batas zona aman.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="container reveal">
+        <h2 class="section-title">Latest <span>News</span></h2>
+        <div class="news-grid">
+            <div class="news-card glass">
+                <div class="news-date">Agustus 2026</div>
+                <h3>Season 4 Reset</h3>
+                <p>Selamat datang di era baru Nubia! Ekonomi baru, terrain diperbarui, dan leaderboard yang fresh.</p>
+            </div>
+            <div class="news-card glass">
+                <div class="news-date">Juli 2026</div>
+                <h3>BattlePass Release</h3>
+                <p>Sistem BattlePass yang paling banyak diminta akhirnya hadir. Selesaikan tantangan harian untuk loot epic.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="container reveal">
+        <h2 class="section-title">Server <span>Gallery</span></h2>
+        <div class="gallery-grid">
+            <div class="gallery-item glass">
+                <div class="gallery-art art-spawn"><i class="fas fa-tree"></i></div>
+                <span class="gallery-caption">Spawn</span>
+            </div>
+            <div class="gallery-item glass">
+                <div class="gallery-art art-arena"><i class="fas fa-khanda"></i></div>
+                <span class="gallery-caption">PvP Arena</span>
+            </div>
+            <div class="gallery-item glass">
+                <div class="gallery-art art-biomes"><i class="fas fa-mountain-sun"></i></div>
+                <span class="gallery-caption">Custom Biomes</span>
+            </div>
+            <div class="gallery-item glass">
+                <div class="gallery-art art-shop"><i class="fas fa-store"></i></div>
+                <span class="gallery-caption">Shop Area</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-section">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>NUBIA<span>.</span></h3>
+                <p>The ultimate semi-anarchy Bedrock experience. Survive, fight, and conquer.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#store">Store</a></li>
+                    <li><a href="#rules">Rules</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#support">Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contact</h3>
+                <p>support@nubia.biz.id</p>
+                <p>IP: nubia.biz.id</p>
+                <p>Port: 19193</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 NUBIA SERVER. All Rights Reserved. Not affiliated with Mojang AB.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
